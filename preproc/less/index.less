@@ -1,0 +1,2062 @@
+@img_path: ~"../img";
+@fontColorBasic: #33142a;
+@colorRed: #c82121;
+@topMenuHeight: 150px;
+@topMenuMobHeight: 60px;
+@offsetRight: 60px;
+@section4AnimTime: 500ms;
+
+/*
+    z-index:
+        top-menu: 10
+        scroll-points: 11
+        text-scroll: 12
+        pager: 13
+        modal: 20
+
+    centerer:
+        1480px > 1140
+        1280px - 1480px - 980
+        1024px - 1280px - 980
+        1024px <= 90%
+*/
+
+// -------------- fonts --------------
+@font-face {
+    font-family: 'GothamPro';
+    src: url('../fonts/GothamPro/GothamPro.eot');
+    src: local('Gotham Pro'), local('GothamPro'),
+    url('../fonts/GothamPro/GothamPro.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/GothamPro/GothamPro.woff') format('woff'),
+    url('../fonts/GothamPro/GothamPro.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GothamProMedium';
+    src: url('../fonts/GothamPro/GothamPro-Medium.eot');
+    src: local('Gotham Pro Medium'), local('GothamPro-Medium'),
+    url('../fonts/GothamPro/GothamPro-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/GothamPro/GothamPro-Medium.woff') format('woff'),
+    url('../fonts/GothamPro/GothamPro-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GothamProBold';
+    src: url('../fonts/GothamPro/GothamPro-Bold.eot');
+    src: local('Gotham Pro Bold'), local('GothamPro-Bold'),
+    url('../fonts/GothamPro/GothamPro-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/GothamPro/GothamPro-Bold.woff') format('woff'),
+    url('../fonts/GothamPro/GothamPro-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GothamProBlack';
+    src: url('../fonts/GothamPro/GothamPro-Black.eot');
+    src: local('Gotham Pro Black'), local('GothamPro-Black'),
+    url('../fonts/GothamPro/GothamPro-Black.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/GothamPro/GothamPro-Black.woff') format('woff'),
+    url('../fonts/GothamPro/GothamPro-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+// -------------- all --------------
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+p, ul, li {
+    font-family: GothamPro;
+    font-size: 16px;
+    line-height: 26px;
+    color: @fontColorBasic;
+
+    strong {
+        font-family: GothamProBold;
+    }
+}
+
+.golamago {
+    position: relative;
+    background-color: #f7f7f7;
+
+    &.hidden {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    &&_index {
+        opacity: 0;
+
+        .golamago__section_footer {
+            margin-top: 0;
+        }
+    }
+    &&_about, &&_partners, &&_pressa {
+        padding-top: @topMenuHeight;
+
+        .golamago-topmenu {
+            background-color: #f7f7f7;
+        }
+        .golamago-topmenu__soc {
+            a {
+                color: @fontColorBasic;
+            }
+        }
+        .golamago__text-scroll {
+            position: fixed;
+            top: ~"calc( (100vh - 94px)/2 )";
+        }
+    }
+
+    &__main {
+        position: relative;
+    }
+    &__section {
+        position: relative;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-size: 50vw;
+        background-image: none;
+        background-position: 50vw 0;
+
+        &&_intro {
+            .golamago-iphone {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                left: 0;
+                margin: auto;
+                padding-top: 40px;
+            }
+        }
+        &&_video {
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 50vw;
+                height: inherit;
+                background-color: #dcd8db;
+                z-index: 1;
+            }
+        }
+        &&_faster {
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 40vw;
+                height: inherit;
+                background-color: #21c8be;
+                z-index: 1;
+            }
+
+            .golamago-iphone-scroller {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: ~"calc(60vw - 150px)";
+                margin: auto 0;
+                z-index: 2;
+            }
+        }
+        &&_clients {
+            background-image: ~"url(@{img_path}/two-iphones.jpg)";
+            background-position: 50vw center;
+            background-size: 800px;
+        }
+        &&_footer {
+            margin-top: 50px;
+            padding: 60px 0;
+            background-color: @fontColorBasic;
+        }
+
+        .golamago__img {
+            position: absolute;
+            top: 0;
+            left: 50vw;
+            width: 50vw;
+            height: auto;
+        }
+    }
+    &__centerer {
+        position: relative;
+        width: 1140px;
+        height: inherit;
+        margin: 0 auto;
+    }
+
+    &__h2, &__h3, &__h4 {
+        color: @fontColorBasic;
+    }
+    &__h2 {
+        font-family: GothamProBlack;
+        font-size: 49px;
+        margin-bottom: 20px;
+
+        &&_gray {
+            color: #c8c4c7;
+        }
+        &&_red {
+            color: red;
+        }
+    }
+    &__h3 {
+        font-family: GothamProBlack;
+        font-size: 28px;
+        margin-bottom: 15px;
+
+        &&_gray {
+            color: #c8c4c7;
+        }
+    }
+    &__h4 {
+        font-family: GothamPro;
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    &__btn {
+        display: inline-block;
+        background-color: gray;
+        border-radius: 25px;
+        padding: 0 30px;
+        font-family: GothamPro;
+        font-size: 15px;
+        line-height: 50px;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        outline: none;
+
+        &&_sea {
+            background-color: #21c8be;
+        }
+    }
+    &__text-scroll {
+        position: absolute;
+        bottom: 60px;
+        right: @offsetRight; // ориентируемся на плагин fullPage.js
+        width: 9px;
+        height: 94px;
+        background-color: transparent;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-image: ~"url(@{img_path}/scroll_down_text-white.png)";
+        z-index: 12;
+
+        &&_black {
+            background-image: ~"url(@{img_path}/scroll_down_text-black.png)";
+        }
+    }
+    &__a-dark {
+        font-family: GothamPro;
+        color: #90828f;
+        text-decoration: none;
+
+        &:hover {
+            color: white;
+            text-decoration: none;
+        }
+    }
+    &__a-white {
+        font-family: GothamPro;
+        font-size: 14px;
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+            color: white;
+            text-decoration: underline;
+        }
+    }
+    &__text-white {
+        color: white;
+    }
+    &__text-dark {
+        color: #90828f;
+    }
+    &__two-iphones-mob {
+        display: none;
+        width: 100%;
+        height: 400px;
+        background-image: ~"url(@{img_path}/two-iphones-mob.jpg)";
+        background-position: center top;
+        background-size: cover;
+    }
+    &__pos {
+        display: none;
+        margin: 40px 0 30px;
+        font-family: GothamPro;
+        font-size: 22px;
+        color: #cac6c8;
+    }
+
+    // отдельные сущности
+    &-topmenu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: @topMenuHeight;
+        background-color: transparent;
+        z-index: 10;
+
+        &&_opened {
+            background-color: #f7f7f7;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+
+            .golamago-topmenu-li_v1 {
+                display: none;
+            }
+            .golamago-topmenu-li_v2 {
+                display: block;
+            }
+            .golamago-topmenu__soc {
+                a {
+                    color: @fontColorBasic;
+                }
+            }
+        }
+        .golamago__centerer {
+            background-color: transparent;
+            z-index: 1;
+        }
+        &__logo {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: @offsetRight;
+            margin: auto 0;
+            width: 75px;
+            height: inherit;
+            background: transparent ~"url(@{img_path}/logo.png)" center center no-repeat;
+            background-size: contain;
+            text-decoration: none;
+            z-index: 2;
+        }
+        &-ul {
+            display: table;
+            width: 100%;
+            list-style: none;
+            height: inherit;
+        }
+        &-li {
+            float: left;
+            height: inherit;
+            margin-right: 30px;
+            text-align: left;
+            background-color: transparent;
+
+            a {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: start;
+                -ms-flex-pack: start;
+                justify-content: flex-start;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+
+                height: inherit;
+                font-family: GothamProBlack;
+                font-size: 14px;
+                color: @fontColorBasic;
+                text-align: left;
+                text-decoration: none;
+                text-transform: uppercase;
+                white-space: nowrap;
+            }
+            .fas {
+                margin-right: 10px;
+                font-size: 16px;
+            }
+
+            &&_v1 {
+                display: block;
+            }
+            &&_v2 {
+                display: none;
+
+                a {
+                    color: #877682;
+
+                    &:hover {
+                        color: @fontColorBasic;
+                    }
+                }
+            }
+            &&_times {
+                width: 70px;
+
+                a {
+                    color: @fontColorBasic;
+                }
+            }
+        }
+        &__soc {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: @offsetRight;
+
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+
+            height: inherit;
+            margin: auto 0;
+
+            &.dark {
+                a {
+                    color: @fontColorBasic;
+                }
+            }
+            a {
+                margin-right: 30px;
+                color: white;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                .fab {
+                    font-size: 18px;
+                }
+            }
+        }
+    }
+    &-topmenumob {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: none;
+        width: 100vw;
+        height: auto;
+        padding: 10px 0;
+        background-color: #f7f7f7;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        z-index: 10;
+
+        &&_opened{
+            .golamago-topmenumob__close {
+                display: none;
+            }
+            .golamago-topmenumob__bot {
+                display: flex;
+            }
+        }
+        &__top {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+
+            height: @topMenuMobHeight;
+            background-color: transparent;
+
+            > div {
+                -webkit-box-flex: 0;
+                -ms-flex: 0 1 100px;
+                flex: 0 1 100px;
+
+                height: inherit;
+
+                &:first-child {
+                    a {
+                        font-size: 20px;
+                    }
+                }
+                &:last-child {
+                    a {
+                        -webkit-box-pack: end;
+                        -ms-flex-pack: end;
+                        justify-content: flex-end;
+                    }
+                }
+            }
+            a {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+
+                height: inherit;
+                font-family: GothamProBlack;
+                font-size: 14px;
+                color: @fontColorBasic;
+                text-decoration: none;
+                text-transform: uppercase;
+                background-color: transparent;
+                white-space: nowrap;
+
+                &.golamago-topmenumob__close {
+                    display: none;
+                }
+            }
+        }
+        &__bot {
+            display: none;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+
+            height: ~"calc(100vh - 60px - 20px)";
+            background-color: transparent;
+
+            > ul {
+                list-style: none;
+                margin-bottom: 50px;
+                background-color: transparent;
+
+                li {
+                    display: block;
+                    margin-bottom: 20px;
+                    text-align: center;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+
+                    a {
+                        height: 20px;
+                        font-family: GothamProBlack;
+                        font-size: 26px;
+                        color: @fontColorBasic;
+                        text-decoration: none;
+                        text-transform: uppercase;
+                        background-color: transparent;
+                        white-space: nowrap;
+                    }
+                }
+            }
+        }
+        &__centerer {
+            width: 90vw;
+            background-color: pink;
+        }
+        &__logo {
+            background: transparent ~"url(@{img_path}/logo.png)" center center no-repeat;
+            background-size: contain;
+        }
+        .golamago-soc {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            background-color: transparent;
+        }
+    }
+
+    &-intro {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        width: 365px;
+        height: inherit;
+        background-color: transparent;
+
+        .golamago__btn_sea {
+            margin-top: 30px;
+        }
+    }
+    &-work {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        width: 460px;
+        height: inherit;
+        background-color: transparent;
+
+        .golamago__h4 {
+            margin-top: 35px;
+            margin-bottom: 10px;
+        }
+    }
+    &-partners {
+        background-color: transparent;
+
+        &__activers, &__comming-soon {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+        &__activers {
+            margin-bottom: 20px;
+        }
+
+        &__item {
+            display: inline-block;
+            margin-right: 20px;
+            background-color: transparent;
+            opacity: 0;
+
+            &:last-child {
+                margin-right: 0;
+            }
+            div {
+                height: 12px;
+                font-family: GothamPro;
+                font-size: 12px;
+                color: #bcb2b9;
+                text-align: center;
+            }
+            &&_metro {
+                img {
+                    height: 60px;
+                }
+            }
+            &&_lenta {
+                img {
+                    height: 50px;
+                }
+            }
+            &&_karusel {
+                img {
+                    height: 50px;
+                }
+            }
+            &&_globus {
+                img {
+                    height: 60px;
+                }
+            }
+            &&_more {
+                img {
+                    height: 50px;
+                }
+            }
+        }
+    }
+    &-video-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+    &-video {
+        position: relative;
+        width: 100%;
+        height: ~"calc(100% * 0.5622)";
+        background: whitesmoke ~"url(@{img_path}/bg-video.jpg)" center center no-repeat;
+        background-size: cover;
+        cursor: pointer;
+        z-index: 2;
+
+        &:hover {
+            .golamago-video__play {
+                background-color: rgba(0,0,0,0.7);
+            }
+        }
+        &__play {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+
+            width: 100px;
+            height: 100px;
+            margin: auto auto;
+            color: white;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.5);
+
+            .fas {
+                margin-left: 5px;
+                font-size: 20px;
+            }
+        }
+        .golamago__h2 {
+            float: right;
+            margin-top: 90px;
+            margin-right: 90px;
+        }
+    }
+    &-faster {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        width: 450px;
+        height: inherit;
+        background-color: transparent;
+
+        &__textes {
+            margin-top: 20px;
+        }
+        &__text {
+            display: none;
+
+            &&_active {
+                display: block;
+            }
+        }
+        .golamago__h2 {
+            margin-bottom: 15px;
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+        }
+    }
+    &-clients {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        width: 550px;
+        height: inherit;
+        background-color: transparent;
+
+        > div {
+            -ms-flex-preferred-size: 100%;
+            flex-basis: 100%;
+        }
+        &__h2s {
+            margin-bottom: 50px;
+        }
+        .golamago__h2 {
+            display: inline-block;
+            cursor: pointer;
+            color: #c8c4c7;
+
+            &:not(:last-child) {
+                margin-right: 30px;
+            }
+
+            &.active {
+                color: @fontColorBasic;
+                cursor: default;
+            }
+        }
+        .golamago-market {
+            &:not(:last-child) {
+                margin-right: 30px;
+            }
+        }
+    }
+
+    &-footer {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+
+        height: auto;
+        font-family: GothamPro;
+        font-size: 14px;
+        color: white;
+        text-transform: uppercase;
+
+        &__logo {
+            cursor: pointer;
+
+            img {
+                height: 90px;
+            }
+        }
+        .golamago__a-dark {
+            display: table;
+            text-transform: uppercase;
+
+            &:not(:last-child) {
+                margin-bottom: 15px;
+            }
+        }
+        .golamago__text-dark {
+            margin: 20px 0 5px;
+        }
+    }
+    &-footer-mob {
+        display: none;
+        font-family: GothamPro;
+        font-size: 14px;
+        text-align: center;
+        text-transform: uppercase;
+
+        .golamago__a-dark {
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        .golamago-soc {
+            margin: 30px 0;
+            height: 30px;
+
+            a {
+                width: 30px;
+                font-size: 12px;
+
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+        }
+        &__contacts {
+            span.golamago__text-white {
+                display: block;
+                margin-bottom: 20px;
+            }
+            .golamago__text-dark {
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    &-pager {
+        position: absolute;
+        bottom: 60px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 25px;
+        height: 30px;
+        font-family: GothamProBlack;
+        color: @fontColorBasic;
+        background-color: transparent;
+        z-index: 13;
+
+        &__top {
+            position: absolute;
+            margin-top: 3px;
+            margin-left: 30px;
+            font-size: 12px;
+        }
+        &__basic {
+            font-size: 36px;
+        }
+    }
+    &-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: none;
+
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0,0,0,0.5);
+        opacity: 1;
+        z-index: 20;
+
+        &__container {
+            position: relative;
+            display: block;
+            background-color: white;
+        }
+        &__close {
+            position: absolute;
+            top: 0;
+            right: -30px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            background-color: transparent;
+        }
+    }
+    &-iphone-scroller {
+        width: 300px;
+        height: 626px;
+        background-color: transparent;
+
+        &__block {
+            position: relative;
+            width: inherit;
+            height: inherit;
+        }
+        &__arrow {
+            position: absolute;
+            top: 0;
+            right: -65px;
+            width: 25px;
+            height: 25px;
+            background-color: transparent;
+            cursor: pointer;
+            color: white;
+
+            &&_prev {
+                top: 21%;
+            }
+            &&_next {
+                top: 63%;
+            }
+            &&_disabled {
+                opacity: 0.5;
+                cursor: default;
+            }
+            .fas {
+                font-size: 40px;
+                line-height: 25px;
+            }
+        }
+        &__container {
+            position: relative;
+            width: inherit;
+            height: inherit;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+            background-image: ~"url(@{img_path}/iphone-section-0.png)";
+        }
+        &__step {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: inherit;
+            height: inherit;
+            visibility: hidden;
+            opacity: 0;
+
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: contain;
+
+            &&_1 {
+                background-image: ~"url(@{img_path}/iphone-section-1.png)";
+            }
+            &&_2 {
+                background-image: ~"url(@{img_path}/iphone-section-2.png)";
+            }
+            &&_3 {
+                background-image: ~"url(@{img_path}/iphone-section-3.png)";
+            }
+            &&_4 {
+                background-image: ~"url(@{img_path}/iphone-section-4.png)";
+            }
+            &&_active {
+            }
+            &.visible {
+                visibility: visible;
+                opacity: 1;
+                transition: opacity @section4AnimTime linear;
+            }
+            &.hidden {
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s @section4AnimTime, opacity @section4AnimTime linear;
+            }
+        }
+    }
+    &-markets {
+        text-align: left;
+    }
+    &-market {
+        display: none;
+        padding: 0 30px 0 80px;
+        font-family: GothamPro;
+        font-size: 18px;
+        line-height: 60px;
+        color: @fontColorBasic;
+        text-decoration: none;
+        white-space: nowrap;
+        border-radius: 25px;
+        background-repeat: no-repeat;
+        background-color: white;
+        background-position: 30px center;
+        background-size: 30px;
+        box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+
+        &.active {
+            display: inline-block;
+        }
+
+        &&_app {
+            background-image: ~"url(@{img_path}/app-market.png)";
+            background-position: 30px 9px;
+        }
+        &&_ggl {
+            background-image: ~"url(@{img_path}/ggl-market.png)";
+        }
+    }
+    &-iphone {
+        width: 300px;
+        height: auto;
+        background-color: transparent;
+
+        &__content {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+        }
+
+        &__mask {
+            position: relative;
+            width: 100%;
+            height: auto;
+            z-index: 1;
+        }
+        @tmp_w: ~"calc(300px * 0.835)";
+        @tmp_h: ~"calc(650px * 0.815)";
+        &__slider {
+            position: relative;
+        }
+        .slick {
+            position: absolute;
+            top: 15px;
+            left: 25px;
+            width: @tmp_w;
+            height: @tmp_h;
+            border-radius: 25px;
+            background-color: #ebebeb;
+            z-index: 2;
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: 25%;
+                width: 50%;
+                height: 4%;
+                border-radius: 0 0 7px 7px;
+                background-color: #efefef;
+                z-index: 3;
+            }
+
+            .golamago-iphone__img {
+                width: @tmp_w;
+                height: @tmp_h;
+            }
+            .slick-arrow {
+                width: 30px;
+                height: 30px;
+                background-color: transparent;
+
+                &:before {
+                    font-size: 30px;
+                    color: black;
+                }
+                &.slick-prev {
+                    left: -50px;
+
+                    &:before {
+                        color: darken(#f7f7f7, 25%);
+                    }
+                }
+                &.slick-next {
+                    right: -50px;
+
+                    &:before {
+                        color: darken(#ff8f2b, 15%);
+                    }
+                }
+            }
+        }
+    }
+    &-soc {
+        a {
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+
+            width: 50px;
+            height: inherit;
+            border-radius: 50%;
+            font-size: 20px;
+            text-decoration: none;
+            color: white;
+            background-color: gray;
+
+            &:not(:last-child) {
+                margin-right: 20px;
+            }
+
+            &.fb {
+                background-color: #23599a;
+            }
+            &.vk {
+                background-color: #54729a;
+            }
+            &.inst {
+                background-color: #fb2d78;
+            }
+        }
+    }
+
+    &-page-about {
+        display: flex;
+        position: relative;
+
+        &__left-menu {
+            position: relative;
+            flex: 0 0 360px;
+            margin-right: 10px;
+            background-color: transparent;
+
+            ul {
+                list-style: none;
+                margin-top: 50px;
+
+                li {
+                    margin-bottom: 20px;
+                    font-size: 14px;
+                    line-height: 14px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+                a {
+                    text-transform: uppercase;
+                    font-family: GothamProMedium;
+                    color: #877682;
+                    font-size: 14px;
+                    line-height: 14px;
+                    text-decoration: none;
+
+                    &.active, &:hover {
+                        color: @fontColorBasic;
+                    }
+                }
+            }
+        }
+        &__menu {
+            position: absolute;
+            top: 0;
+            width: 360px;
+
+            &&_fixed {
+                position: fixed;
+                top: @topMenuHeight;
+            }
+        }
+        &__na-glavnyu {
+            float: right;
+        }
+        &__content {
+            flex: 0 1 100%;
+            margin-top: 25px;
+            background-color: transparent;
+
+            #block-1 {
+                margin-top: 60px;
+            }
+            ul {
+                list-style: none;
+
+                li {
+                    font-family: GothamPro;
+                }
+            }
+            ol {
+                margin-left: 20px;
+
+                li {
+                    font-family: GothamPro;
+                }
+            }
+            h3 {
+                margin-top: 30px;
+
+                &:first-of-type {
+                    margin-top: 0;
+                }
+            }
+            h3 + p, h3 + ol {
+                margin-top: 20px;
+            }
+            h4 {
+                font-family: GothamProBold;
+                margin-top: 30px;
+                margin-bottom: 10px;
+            }
+            strong {
+                font-family: GothamProBlack;
+            }
+            a {
+                color: #21c8be;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+    &-page-partners {
+        display: flex;
+
+        &__cell {
+            flex: 0 1 50%;
+            background-color: transparent;
+
+            &&_1 {
+                margin-right: 20px;
+            }
+        }
+        &__form {
+            width: inherit;
+
+            &-row {
+                background-color: transparent;
+                margin-bottom: 10px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            input[type="submit"] {
+                display: inline-block;
+                background-color: #877682;
+                border-radius: 20px;
+                color: white;
+                padding: 0 40px;
+                font-family: GothamPro;
+                font-size: 15px;
+                height: 50px;
+                line-height: 50px;
+                margin-top: 10px;
+                outline: none;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: darken(#877682, 5%);
+                }
+            }
+        }
+        &__input {
+            display: block;
+            width: 100%;
+            height: 40px;
+            margin-bottom: 40px;
+            background-color: transparent;
+            border-bottom: #e9e8e9 solid 3px;
+            font-family: GothamPro;
+            font-size: 30px;
+            color: @fontColorBasic;
+            outline: none;
+
+            &&_err {
+                border-bottom-color: @colorRed;
+            }
+        }
+        &__err {
+            display: none;
+            color: @colorRed;
+            font-family: GothamPro;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        .golamago__h2 {
+            margin-bottom: 20px;
+        }
+        .golamago__h2_gray {
+            width: 540px;
+        }
+    }
+    &-page-pressa {
+        position: relative;
+
+        &__top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: transparent;
+        }
+        &__items {
+            position: relative;
+            //margin-bottom: 100px;
+            //padding-top: 50px;
+        }
+        &__na-glavnyu {
+            float: right;
+        }
+    }
+    &-page-pressa-item {
+        box-sizing: border-box;
+        width: ~"calc(33% - 10px*2 )";
+        height: auto;
+        margin: 10px;
+        padding: 28px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+
+        &__img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+            height: 140px;
+            margin-bottom: 20px;
+            background-color: transparent;
+
+            img {
+                width: auto;
+                height: auto;
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+        &__text {
+            width: 100%;
+            height: auto;
+            background-color: transparent;
+            font-family: GothamPro;
+            font-size: 16px;
+            line-height: 22px;
+            color: @fontColorBasic;
+        }
+    }
+}
+
+iframe, .golamago-modal__container {
+    width: 1060px;
+    height: 596px;
+}
+#fp-nav.right {
+    right: ~"calc(@{offsetRight} - 8px)";
+}
+#fp-nav ul li a span {
+    background-color: white;
+}
+#fp-nav.dark ul li a span {
+    background-color: @fontColorBasic;
+}
+
+// -------------- media --------------
+//> 1480px
+
+//1280px - 1480px
+@media all and (max-width: 1480px) {
+    @topMenuHeight: 100px;
+    @offsetRight: 60px;
+    @fixedBottom: 30px;
+    @scale: 0.8;
+
+    .golamago {
+        &&_about, &&_partners, &&_pressa {
+            padding-top: @topMenuHeight;
+        }
+        &__centerer {
+            width: 980px;
+        }
+        &__text-scroll {
+            bottom: @fixedBottom;
+            right: @offsetRight;
+        }
+        &__section {
+            &&_clients {
+                background-size: 550px;
+            }
+            &&_footer {
+                padding: 40px 0;
+            }
+        }
+        &-topmenu {
+            height: @topMenuHeight;
+
+            &__logo {
+                left: @offsetRight;
+                width: 70px;
+            }
+            &__soc {
+                right: @offsetRight;
+            }
+        }
+        &-intro {
+            width: 365px;
+
+            .golamago__btn_sea {
+                margin-top: 40px;
+            }
+        }
+        &-iphone {
+            width: 220px;
+
+            @tmp_w: ~"calc(300px * 0.6)";
+            @tmp_h: ~"calc(650px * 0.6)";
+            .slick {
+                top: 10px;
+                left: 20px;
+                width: @tmp_w;
+                height: @tmp_h;
+
+                .golamago-iphone__img {
+                    width: @tmp_w;
+                    height: @tmp_h;
+                }
+                .slick-arrow {
+                    width: 20px;
+                    height: 20px;
+
+                    &:before {
+                        font-size: 20px;
+                    }
+                    &.slick-prev {
+                        left: -40px;
+                    }
+                    &.slick-next {
+                        right: -40px;
+                    }
+                }
+            }
+        }
+        &-pager {
+            bottom: @fixedBottom;
+        }
+        &-work {
+            width: 460px;
+        }
+        &-partners {
+            &__item {
+                &&_metro {
+                    img {
+                        height: ~"calc(60px * @{scale})";
+                    }
+                }
+                &&_lenta {
+                    img {
+                        height: ~"calc(50px * @{scale})";
+                    }
+                }
+                &&_karusel {
+                    img {
+                        height: ~"calc(50px * @{scale})";
+                    }
+                }
+                &&_globus {
+                    img {
+                        height: ~"calc(60px * @{scale})";
+                    }
+                }
+                &&_more {
+                    img {
+                        height: ~"calc(50px * @{scale})";
+                    }
+                }
+            }
+        }
+        &-video {
+            &__play {
+                width: ~"calc(100px * @{scale})";
+                height: ~"calc(100px * @{scale})";
+
+                .fas {
+                    font-size: 18px;
+                }
+            }
+            .golamago__h2 {
+                margin-top: 50px;
+                margin-right: 50px;
+            }
+        }
+        &-faster {
+            width: 450px;
+        }
+        &-iphone-scroller {
+            width: ~"calc(300px * @{scale})";
+            height: ~"calc(626px * @{scale})";
+        }
+        &-clients {
+            width: 550px;
+        }
+        &-footer {
+            &__logo {
+                img {
+                    height: 80px;
+                }
+            }
+        }
+
+        &-page-pressa-item {
+            padding: 18px;
+
+            &__img {
+                height: ~"calc(140px * @{scale})";
+                margin-bottom: ~"calc(20px * @{scale})";
+            }
+        }
+        &-page-about {
+            &__menu {
+                &&_fixed {
+                    top: @topMenuHeight;
+                }
+            }
+        }
+    }
+    iframe, .golamago-modal__container {
+        width: ~"calc(1060px * @{scale})";
+        height: ~"calc(596px * @{scale})";
+    }
+    #fp-nav.right {
+        right: ~"calc(@{offsetRight} - 8px)";
+    }
+}
+
+//1024px - 1280px
+@media all and (max-width: 1280px) {
+    @topMenuHeight: 80px;
+    @offsetRight: 30px;
+    @fixedBottom: 20px;
+    @scale: 0.6;
+
+    p, ul, li {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .golamago {
+        &&_about, &&_partners, &&_pressa {
+            padding-top: @topMenuHeight;
+        }
+
+        &__h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        &__h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        &__h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        &__section {
+            &&_clients {
+                background-size: 450px;
+            }
+            &&_footer {
+                margin-top: 30px;
+                padding: 30px 0;
+            }
+        }
+        &__centerer {
+            width: 800px;
+        }
+        &__text-scroll {
+            bottom: @fixedBottom;
+            right: @offsetRight;
+        }
+        &-topmenu {
+            height: @topMenuHeight;
+
+            &__logo {
+                left: @offsetRight;
+                width: 50px;
+            }
+            &__soc {
+                right: @offsetRight;
+            }
+        }
+        &-intro {
+            width: 300px;
+
+            .golamago__btn_sea {
+                margin-top: 20px;
+            }
+        }
+        &-iphone {
+            width: 180px;
+
+            @tmp_w: ~"calc(300px * 0.5)";
+            @tmp_h: ~"calc(650px * 0.495)";
+            .slick {
+                top: 6px;
+                left: 15px;
+                width: @tmp_w;
+                height: @tmp_h;
+
+                .golamago-iphone__img {
+                    width: @tmp_w;
+                    height: @tmp_h;
+                }
+            }
+        }
+        &-pager {
+            bottom: @fixedBottom;
+        }
+        &-work {
+            width: 400px;
+
+            .golamago__h4 {
+                margin-top: 25px;
+            }
+        }
+        &-partners {
+            &__activers {
+                margin-bottom: 10px;
+            }
+            &__item {
+                margin-right: 10px;
+
+                &&_metro {
+                    img {
+                        height: ~"calc(60px * @{scale})";
+                    }
+                }
+                &&_lenta {
+                    img {
+                        height: ~"calc(50px * @{scale})";
+                    }
+                }
+                &&_karusel {
+                    img {
+                        height: ~"calc(50px * @{scale})";
+                    }
+                }
+                &&_globus {
+                    img {
+                        height: ~"calc(60px * @{scale})";
+                    }
+                }
+                &&_more {
+                    img {
+                        height: ~"calc(50px * @{scale})";
+                    }
+                }
+            }
+        }
+        &-video {
+            &__play {
+                width: ~"calc(100px * @{scale})";
+                height: ~"calc(100px * @{scale})";
+
+                .fas {
+                    font-size: 14px;
+                }
+            }
+            .golamago__h2 {
+                margin-top: 30px;
+                margin-right: 30px;
+            }
+        }
+        &-faster {
+            width: 450px;
+        }
+        &-iphone-scroller {
+            width: ~"calc(300px * @{scale})";
+            height: ~"calc(626px * @{scale})";
+        }
+        &-clients {
+            width: 450px;
+
+            &__h2s {
+                margin-bottom: 30px;
+            }
+            .golamago__h2 {
+                &:not(:last-child) {
+                    margin-right: 20px;
+                }
+            }
+            .golamago-market {
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
+            }
+        }
+        &-footer {
+            font-size: 12px;
+
+            &__logo {
+                img {
+                    height: 60px;
+                }
+            }
+        }
+
+        &-page-pressa-item {
+            &__img {
+                height: ~"calc(140px * @{scale})";
+                margin-bottom: ~"calc(20px * @{scale})";
+            }
+        }
+        &-page-partners {
+            &__form {
+                input[type="submit"] {
+                    border-radius: 20px;
+                    padding: 0 30px;
+                    height: 40px;
+                    line-height: 40px;
+                }
+            }
+            &__input {
+                height: 30px;
+                margin-bottom: 25px;
+                border-bottom-width: 2px;
+                font-size: 24px;
+            }
+            .golamago__h2_gray {
+                width: 100%;
+            }
+        }
+        &-page-about {
+            &__menu {
+                &&_fixed {
+                    top: @topMenuHeight;
+                }
+            }
+            &__content {
+                #block-1 {
+                    margin-top: 58px;
+                }
+            }
+        }
+    }
+    iframe, .golamago-modal__container {
+        width: ~"calc(1060px * @{scale})";
+        height: ~"calc(596px * @{scale})";
+    }
+    #fp-nav.right {
+        right: ~"calc(@{offsetRight} - 8px)";
+    }
+}
+
+//640px - 1024px
+@media all and (max-width: 1024px) {
+    @topMenuHeight: 80px;
+    @offsetRight: 30px;
+    @fixedBottom: 20px;
+    @scale: 0.6;
+
+    .golamago {
+        &&_about, &&_partners, &&_pressa {
+            padding-top: ~"calc(@{topMenuHeight} + 20px)";
+        }
+
+        &__centerer {
+            width: 90%;
+        }
+        &__pos {
+            display: block;
+        }
+        &__two-iphones-mob {
+            display: block;
+        }
+        &__section {
+            .golamago__img {
+                position: static;
+                display: block;
+                width: 90%;
+                margin-left: 5vw;
+            }
+            &&_intro {
+                margin-top: 80px;
+            }
+            &&_work {
+                margin-top: 40px;
+            }
+            &&_video {
+                margin-top: 40px;
+
+                &:after {
+                    content: none;
+                }
+            }
+            &&_faster {
+                &:after {
+                    content: none;
+                }
+
+                .golamago-iphone-scroller {
+                    position: static;
+                    display: table;
+                    margin: 40px auto 0;
+                }
+            }
+            &&_clients {
+                border-top: #e9e8e9 solid 4px;
+                background-image: none;
+            }
+            &&_footer {
+                padding: 30px 0;
+            }
+        }
+        &-topmenu {
+            display: none;
+        }
+        &-topmenumob {
+            display: block;
+        }
+        &__text-scroll {
+            display: none !important;
+        }
+        &-iphone {
+            display: none;
+        }
+        &-pager {
+            display: none;
+        }
+        #fp-nav {
+            display: none;
+        }
+        &-intro {
+            width: 100%;
+
+            .golamago__h2 {
+                width: 100%;
+            }
+        }
+        &-work {
+            width: 100%;
+        }
+
+        @scale2: 0.8;
+        &-partners {
+            &__item {
+                opacity: 1;
+
+                &&_metro {
+                    img {
+                        height: ~"calc(60px * @{scale2})";
+                    }
+                }
+                &&_lenta {
+                    img {
+                        height: ~"calc(50px * @{scale2})";
+                    }
+                }
+                &&_karusel {
+                    img {
+                        height: ~"calc(50px * @{scale2})";
+                    }
+                }
+                &&_globus {
+                    img {
+                        height: ~"calc(60px * @{scale2})";
+                    }
+                }
+                &&_more {
+                    img {
+                        height: ~"calc(50px * @{scale2})";
+                    }
+                }
+            }
+        }
+        &-video {
+            position: static;
+            width: 100vw;
+            height: ~"calc(100vw * 0.5622)";
+
+            .golamago__h2 {
+                display: none;
+            }
+        }
+        &-faster {
+            width: 100%;
+        }
+        &-iphone-scroller {
+            &__arrow {
+                color: black;
+            }
+        }
+        &-clients {
+            width: 100%;
+
+            .golamago__h2 {
+                display: block;
+                margin: 0;
+
+                &:not(:last-child) {
+                    margin-right: 0;
+                }
+            }
+        }
+        &-markets {
+            text-align: center;
+        }
+        &-market {
+            padding: 0 20px 0 50px;
+            border-radius: 12.5px;
+            font-size: 12px;
+            line-height: 35px;
+            background-position: 20px center;
+            background-size: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+
+            &&_app {
+                background-position: 20px 8px;
+            }
+        }
+        &-footer {
+            display: none;
+        }
+        &-footer-mob {
+            display: block;
+        }
+
+        &-page-partners {
+            flex-direction: column;
+
+            &__cell {
+                &&_1 {
+                    width: 360px;
+                    margin-right: 0;
+                    margin-bottom: 30px;
+                }
+                &&_2 {
+                    width: 100%;
+                }
+            }
+        }
+        &-page-pressa {
+            &__top {
+                display: block;
+
+                .golamago__h2 {
+                    text-align: center;
+                }
+            }
+            &__na-glavnyu {
+                display: none;
+            }
+        }
+        &-page-pressa-item {
+            width: ~"calc(50% - 20px)";
+
+            &__img {
+                width: 100%;
+                height: ~"calc(140px * @{scale})";
+                margin-bottom: ~"calc(20px * @{scale})";
+            }
+            &__text {
+                width: 100%;
+            }
+        }
+        &-page-about {
+            flex-direction: column;
+
+            &__left-menu {
+                flex: 0 0 100%;
+                margin-right: 0;
+
+                ul {
+                    list-style: none;
+
+                    li {
+                        float: left;
+                        width: ~"calc(50% - 5px)";
+                        margin-right: 10px;
+
+                        &:nth-child(2n) {
+                            margin-right: 0;
+                        }
+                    }
+                    a {
+                        text-transform: uppercase;
+                        font-family: GothamProMedium;
+                        color: #877682;
+                        font-size: 14px;
+                        text-decoration: none;
+
+                        &.active, &:hover {
+                            color: @fontColorBasic;
+                        }
+                    }
+                }
+            }
+            &__menu {
+                position: static;
+                width: 100%;
+            }
+            &__na-glavnyu {
+                display: none;
+            }
+            &__content {
+                #block-1 {
+                    margin-top: 30px;
+                }
+            }
+        }
+    }
+    iframe, .golamago-modal__container {
+        width: 90vw;
+        height: ~"calc(90vw * 0.5622)";
+    }
+}
+
+// < 640px
+@media all and (max-width: 640px) {
+    .golamago {
+        &-page-pressa-item {
+            width: 100%;
+            margin: 0;
+            margin-bottom: 10px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}
